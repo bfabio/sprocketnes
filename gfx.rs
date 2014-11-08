@@ -235,7 +235,7 @@ impl StatusLineText {
             return;
         }
         let y = match self.animation {
-            Idle => fail!(),
+            Idle => panic!(),
             SlidingOut(y) => y as int,
             Pausing(_) => STATUS_LINE_Y as int,
         };

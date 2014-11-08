@@ -222,7 +222,7 @@ impl Mem for Vram {
         } else if addr < 0x4000 {   // Palette area
             self.palette[addr as uint & 0x1f]
         } else {
-            fail!("invalid VRAM read")
+            panic!("invalid VRAM read")
         }
     }
     fn storeb(&mut self, addr: uint16_t, val: uint8_t) {
@@ -367,11 +367,11 @@ impl Mem for Ppu {
             1 => *self.regs.mask,
             2 => self.read_ppustatus(),
             3 => 0, // OAMADDR is read-only
-            4 => fail!("OAM read unimplemented"),
+            4 => panic!("OAM read unimplemented"),
             5 => 0, // PPUSCROLL is read-only
             6 => 0, // PPUADDR is read-only
             7 => self.read_ppudata(),
-            _ => fail!("can't happen")
+            _ => panic!("can't happen")
         }
     }
 
@@ -387,7 +387,7 @@ impl Mem for Ppu {
             5 => self.update_ppuscroll(val),
             6 => self.update_ppuaddr(val),
             7 => self.write_ppudata(val),
-            _ => fail!("can't happen")
+            _ => panic!("can't happen")
         }
     }
 }

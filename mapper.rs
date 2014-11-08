@@ -33,7 +33,7 @@ pub fn create_mapper(rom: Box<Rom>) -> Box<Mapper+Send> {
         },
         1 => box SxRom::new(rom) as Box<Mapper+Send>,
         4 => box TxRom::new(rom) as Box<Mapper+Send>,
-        _ => fail!("unsupported mapper")
+        _ => panic!("unsupported mapper")
     }
 }
 
@@ -97,7 +97,7 @@ impl SxCtrl {
             0 | 1 => Switch32K,
             2 => FixFirstBank,
             3 => FixLastBank,
-            _ => fail!("can't happen")
+            _ => panic!("can't happen")
         }
     }
 }
@@ -316,7 +316,7 @@ impl Mapper for TxRom {
                     0 ... 1 => self.chr_banks_2k[bank_update_select] = val,
                     2 ... 5 => self.chr_banks_1k[bank_update_select - 2] = val,
                     6 ... 7 => self.prg_banks[bank_update_select - 6] = val,
-                    _ => fail!()
+                    _ => panic!()
                 }
             }
         } else if addr < 0xc000 {
